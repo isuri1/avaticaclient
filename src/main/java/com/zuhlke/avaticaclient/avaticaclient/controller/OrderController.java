@@ -23,10 +23,11 @@ public class OrderController {
     public Iterable<OrderDto> index() {
 
         final List<Order> orders = orderRepo.findAll();
-        return orders.stream().map(user -> {
+        return orders.stream().map(order -> {
             OrderDto dto = new OrderDto();
-            dto.setId(user.getId());
-            dto.setName(user.getName());
+            dto.setId(order.getId());
+            dto.setName(order.getName());
+            dto.setUser(order.getUser());
             return dto;
         }).collect(Collectors.toList());
     }
