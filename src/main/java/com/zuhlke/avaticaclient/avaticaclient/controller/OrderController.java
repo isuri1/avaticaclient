@@ -3,9 +3,7 @@ package com.zuhlke.avaticaclient.avaticaclient.controller;
 import com.zuhlke.avaticaclient.avaticaclient.repo.OrderRepo;
 import com.zuhlke.avaticaclient.avaticaclient.dto.OrderDto;
 import com.zuhlke.avaticaclient.avaticaclient.model.Order;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +17,7 @@ public class OrderController {
     public OrderController(OrderRepo orderRepo) {
         this.orderRepo = orderRepo;
     }
+
     @GetMapping("/orders")
     public Iterable<OrderDto> index() {
 
@@ -27,7 +26,6 @@ public class OrderController {
             OrderDto dto = new OrderDto();
             dto.setId(order.getId());
             dto.setName(order.getName());
-            dto.setUser(order.getUser());
             return dto;
         }).collect(Collectors.toList());
     }

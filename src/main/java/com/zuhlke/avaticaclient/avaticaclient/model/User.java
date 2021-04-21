@@ -3,7 +3,7 @@ package com.zuhlke.avaticaclient.avaticaclient.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERS", schema = "H2_2")
+@Table(name = "USERS")
 public class User {
 
     @Id

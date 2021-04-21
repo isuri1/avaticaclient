@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Iterable<UserDto> index() {
+    public Iterable<UserDto> getAllUsers() {
 
         final List<User> users = userRepo.findAll();
         return users.stream().map(user -> {
