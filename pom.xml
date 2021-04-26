@@ -50,6 +50,12 @@
 			<artifactId>avatica-core</artifactId>
 			<version>1.17.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.4.1</version>
+		</dependency>
 	</dependencies>
 
 </project>

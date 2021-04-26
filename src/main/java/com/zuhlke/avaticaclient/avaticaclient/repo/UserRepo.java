@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserRepo extends JpaRepository<User, Long> {
 
-    @Transactional(propagation= Propagation.NOT_SUPPORTED)
+//    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     @Override
     List<User> findAll();
 }

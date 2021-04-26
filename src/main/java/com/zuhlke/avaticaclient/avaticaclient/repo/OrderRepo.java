@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrderRepo extends JpaRepository<Order, Long> {
 
-    @Transactional(propagation= Propagation.NOT_SUPPORTED)
+//    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     @Override
     List<Order> findAll();
 

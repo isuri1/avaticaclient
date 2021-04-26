@@ -3,9 +3,10 @@ package com.zuhlke.avaticaclient.avaticaclient.controller;
 import com.zuhlke.avaticaclient.avaticaclient.repo.UserRepo;
 import com.zuhlke.avaticaclient.avaticaclient.dto.UserDto;
 import com.zuhlke.avaticaclient.avaticaclient.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.zuhlke.avaticaclient.avaticaclient.service.IUserService;
+import com.zuhlke.avaticaclient.avaticaclient.service.UserServiceImpl;
+import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserRepo userRepo;
+    private final IUserService userService;
 
-    public UserController(UserRepo userRepo) {
+    public UserController(UserRepo userRepo, IUserService userService) {
         this.userRepo = userRepo;
+        this.userService = userService;
     }
 
     @GetMapping("/users")
@@ -25,10 +28,21 @@ public class UserController {
 
         final List<User> users = userRepo.findAll();
         return users.stream().map(user -> {
-            UserDto dto = new UserDto();
-            dto.setId(user.getId());
-            dto.setName(user.getName());
-            return dto;
+            ModelMapper modelMapper = new ModelMapper();
+            UserDto userDto = modelMapper.map(user, UserDto.class);
+            return userDto;
         }).collect(Collectors.toList());
+    }
+
+    @PutMapping("/users/{id}")
+    public UserDto updateUser(@RequestBody User user, @PathVariable Long id) {
+
+        final UserDto userDto = userService.updateUser(user, id);
+        return userDto;
+    }
+
+    @PostMapping("/users")
+    User createUser(@RequestBody User newUser) {
+        return userRepo.save(newUser);
     }
 }
